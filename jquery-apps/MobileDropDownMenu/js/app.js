@@ -21,14 +21,9 @@ $('#menu a').each(function(){
     //Append option to select
     $select.append($option);
 });
-    
 
-//Create button 
-var $button = $('<button>Go</buton>');
-$('#menu').append($button);
-
-//Bind click to button
-$button.click(function(){
+//Bind change listener to the select
+$select.change(function(){
     //go to select's location
     window.location = $select.val();
 });
