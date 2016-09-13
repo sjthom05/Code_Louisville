@@ -1,3 +1,5 @@
+var showAll = false;
+
 //  1.)  Make sure you have a reference to jQuery from a CDN in the index.html file.  
 
 //  2.)  Use a jQuery to hide all of the answers to all the questions.
@@ -7,9 +9,13 @@ $('.answer').hide();
     Find the approriate event on the jQuery API page to trigger an action on hover https://api.jquery.com/category/events/
     Hint: You can use "this" inside your jQuery function to reference a selected DOM node.  */
 $('.flash-card').mouseenter(function(){
-    $(this).children('.answer').show();
+    if(!showAll){
+        $(this).children('.answer').show();
+    }
 }).mouseleave(function(){
-    $(this).children('.answer').hide();
+    if(!showAll){
+        $(this).children('.answer').hide();
+    }
 });
 
 /*  4.) Use jQuery to find the button element on the page and have it toggle all of the answers on and off when clicked.
@@ -17,10 +23,12 @@ $('.flash-card').mouseenter(function(){
     Bonus:  Change the text of the button using jQuery when you toggle the answers on/off. */  
 $('button').click(function(){
     $('.answer').toggle();
-    if($(this).text() === 'Show All Answers')
+    if(showAll)
     {
-        $(this).text('Hide All Answers')
-    }else {
+        showAll = false;
         $(this).text('Show All Answers')
+    }else{
+        showAll = true
+        $(this).text('Hide All Answers')
     }
 });
