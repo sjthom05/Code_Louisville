@@ -8,6 +8,20 @@ $('.answer').hide();
 /*  3.)  Write code to show the answer when hovering over a flash card, and hide it when the mouse leaves. 
     Find the approriate event on the jQuery API page to trigger an action on hover https://api.jquery.com/category/events/
     Hint: You can use "this" inside your jQuery function to reference a selected DOM node.  */
+$('.flash-card').hover(
+    function(){
+        if(!showAll){
+            $(this).children('.answer').show()
+        }
+    },
+    function(){
+        if(!showAll){
+            $(this).children('.answer').hide()
+        }
+    }
+)
+
+/*
 $('.flash-card').mouseenter(function(){
     if(!showAll){
         $(this).children('.answer').show();
@@ -17,6 +31,7 @@ $('.flash-card').mouseenter(function(){
         $(this).children('.answer').hide();
     }
 });
+*/
 
 /*  4.) Use jQuery to find the button element on the page and have it toggle all of the answers on and off when clicked.
     Hint: jQuery has a toggle function that can toggle the visibility of a selected DOM node.
