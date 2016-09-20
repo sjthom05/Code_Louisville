@@ -1,4 +1,5 @@
 function openBlock (id) {
+    /*
     var block = document.getElementById(id);
     var blocks = document.getElementById("main_content").getElementsByTagName("div");
 
@@ -6,16 +7,22 @@ function openBlock (id) {
         blocks[y].style.display = "none";
     }
     block.style.display = "block";
+    */
+    var blockID = id.split('_')[2];
+
+    $('#main_content div').hide();
+    $('#'+blockID).show();
 
     // TODO: remove the "active" class from all of the li elements inside the menu
     $('#menu li').removeClass('active');
     // TODO: add the "active" class to the li element that contains the link that was clicked
-    $(block).parent().addClass('active');
+    $('#'+id).parent().addClass('active');
 }
 
 $('#menu li a').click(function(){
-    var id = $(this).attr('id').split("_")[2];
+    var id = $(this).attr('id');
     openBlock(id);
+
 });
 
 // TODO: add the "hover" class to the menu items when you hover over them
