@@ -8,9 +8,15 @@ function openBlock (id) {
     block.style.display = "block";
     
     // TODO: remove the "active" class from all of the li elements inside the menu
+    $('#menu li').removeClass('active');
     // TODO: add the "active" class to the li element that contains the link that was clicked
-
+    $(block).parent().addClass('active');
 }
+
+$('#menu li a').click(function(){
+    var id = $(this).attr('id');
+    openBlock(id);
+});
 
 // TODO: add the "hover" class to the menu items when you hover over them
 
