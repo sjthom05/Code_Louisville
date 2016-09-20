@@ -19,7 +19,13 @@ $('#menu li a').click(function(){
 });
 
 // TODO: add the "hover" class to the menu items when you hover over them
-
+$('#menu li a').hover(function(){
+    $(this).addClass('hover');
+},function(){
+    $(this).removeClass('hover');
+});
 
 // TODO: set up the tooltip plugin on all of the links in the menu
-
+$('#menu a').tooltip({
+    delay: 1000
+});
