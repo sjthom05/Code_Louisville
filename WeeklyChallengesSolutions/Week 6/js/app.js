@@ -23,7 +23,7 @@ $('#HeightIncrease').click(function(){
  $('#Print').click(function(){
      $('#output').html("Height: " + box.height + "<br/>" +
      "Weight: " + box.weight + "<br/>" +
-     "Volume: " + box.volum);
+     "Volume: " + box.volume);
  });
 
 //Extra credit
