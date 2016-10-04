@@ -7,7 +7,7 @@
 var box = {
     height:20,
     weight: 20,
-    volum: 20
+    volume: 20
 }
 //Create 2 buttons for Height. The first button decreases the Box Height by 1. The second button increases the Box Height by 1.
 /*
