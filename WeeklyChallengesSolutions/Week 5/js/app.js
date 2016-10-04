@@ -1,5 +1,4 @@
 var pokeapi = 'http://pokeapi.co/api/v2/pokemon'
-var offset = 20
 var results
 
 function addPokemon(name) {
