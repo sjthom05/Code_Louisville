@@ -3,9 +3,15 @@
 var https = require('https')
 var username = 'sjthom05'
 
+//print out message
 function printMessage(username, badgeCount, points) {
     var message = username + " has " + badgeCount + " total badge(s) and " + points + " points in JavaScript";
     console.log(message);
+}
+
+//print out error message
+function printError(error) {
+    console.error(error.message);
 }
 
 //Connect to the API URL (https://teamtreehouse.com/username.json)
@@ -18,13 +24,22 @@ var request = https.get('https://teamtreehouse.com/'+ username +'.json', functio
     });
 
     res.on('end', function(){
-        //Parse the data
-        var profile = JSON.parse(body);
-        //Print the data
-        printMessage(username, profile.badges.length, profile.points.JavaScript)
+        if(res.statusCode === 200) {
+            try{
+                //Parse the data
+                var profile = JSON.parse(body);
+                //Print the data
+                printMessage(username, profile.badges.length, profile.points.JavaScript)
+            } catch(error) {
+                //parse error
+                printError(error)
+            }
+        } else {
+            //status code error
+            printError({message: 'There was an error getting the profile for ' + username + '. (' + res.statusMessage +')'});
+        }
     });  
 });
 
-request.on('error', function(error){
-    console.error(error.message);
-});
+//connection error
+request.on('error', printError);
