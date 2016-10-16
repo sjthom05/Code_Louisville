@@ -18,10 +18,11 @@ var request = https.get('https://teamtreehouse.com/'+ username +'.json', functio
     });
 
     res.on('end', function(){
-        console.log(body);
-    });
-    //Parse the data
-    //Print the data
+        //Parse the data
+        var profile = JSON.parse(body);
+        //Print the data
+        printMessage(username, profile.badges.length, profile.points.JavaScript)
+    });  
 });
 
 request.on('error', function(error){
