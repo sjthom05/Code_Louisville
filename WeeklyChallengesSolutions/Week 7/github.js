@@ -22,7 +22,7 @@ function printError(error) {
 }
 
 
-function getRepos(username){
+function getRepos(username, callback){
   var options = {
     host: 'api.github.com',
     path: '/users/'+ username +'/repos',
@@ -42,20 +42,31 @@ function getRepos(username){
           if(res.statusCode === 200){
             try{
                 var repos = JSON.parse(body);
+                callback(null, repos);
+                /*
                 repos.forEach(function(repo){
                   console.log(repo.name);
                 });
+                */
                 //return repos
               ;
             } catch (error) {
-              printError(error);
+              //printError(error);
+              callback(error);
             } 
           } else {
-            printError({message: 'There was an error getting the profile for ' + username + '. (' + res.statusMessage +')'});
+            //printError({message: 'There was an error getting the profile for ' + username + '. (' + res.statusMessage +')'});
+            callback({
+              message: (
+                'There was an error getting the profile for ' +
+                username + '. (' + res.statusMessage + ')'
+              )
+            });
           }
           
       })
   });
+
   
 
 
