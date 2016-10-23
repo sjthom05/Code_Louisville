@@ -22,13 +22,13 @@ function printError(error) {
 }
 
 
-function getRepos(username){
+function getRepos(username, callback){
   var options = {
-    hostname: 'https://api.gethub.com',
-    path: '/users/'+ username +'repos',
+    host: 'api.github.com',
+    path: '/users/'+ username +'/repos',
     method: 'GET',
     headers: {
-
+      'User-Agent': 'sjthom05'
     }
   }
   
@@ -41,17 +41,32 @@ function getRepos(username){
       res.on('end', function(){
           if(res.statusCode === 200){
             try{
-              console.log('Repos for ' + username);
-              console.log(body);
+                var repos = JSON.parse(body);
+                callback(null, repos);
+                /*
+                repos.forEach(function(repo){
+                  console.log(repo.name);
+                });
+                */
+                //return repos
+              ;
             } catch (error) {
-              printError(error);
+              //printError(error);
+              callback(error);
             } 
           } else {
-            printError({message: 'There was an error getting the profile for ' + username + '. (' + res.statusMessage +')'});
+            //printError({message: 'There was an error getting the profile for ' + username + '. (' + res.statusMessage +')'});
+            callback({
+              message: (
+                'There was an error getting the profile for ' +
+                username + '. (' + res.statusMessage + ')'
+              )
+            });
           }
           
       })
   });
+
   
 
 
