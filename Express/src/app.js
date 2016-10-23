@@ -4,8 +4,13 @@ var express = require('express');
 var posts = require('./mock/posts.json');
 var app = express();
 
+app.use('/static', express.static( __dirname + '/public'));
+
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/templates');
+
 app.get('/', function(req, res){
-    res.send('<h1>this is a test three</h1>')
+    res.render('index');
 });
 
 app.get('/blog/:title?', function(req, res){
@@ -14,8 +19,8 @@ app.get('/blog/:title?', function(req, res){
         res.status(503);
         res.send("This page is under construction");
     }else{
-        var post = posts[title];
-        res.send(post);
+        var post = posts[title] || {};
+        res.render('post', {post: post});
     }
 });
 
